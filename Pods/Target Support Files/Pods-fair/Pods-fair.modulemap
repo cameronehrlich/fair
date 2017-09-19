@@ -1,0 +1,6 @@
+framework module Pods_fair {
+  umbrella header "Pods-fair-umbrella.h"
+
+  export *
+  module * { export * }
+}
