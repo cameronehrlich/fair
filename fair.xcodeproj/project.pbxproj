@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3218F2A11F71D80300707EA9 /* Honda_Accord.json in Resources */ = {isa = PBXBuildFile; fileRef = 3218F29F1F71D80300707EA9 /* Honda_Accord.json */; };
+		3218F2A21F71D80300707EA9 /* Honda.json in Resources */ = {isa = PBXBuildFile; fileRef = 3218F2A01F71D80300707EA9 /* Honda.json */; };
+		3218F2A41F71D8F500707EA9 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218F2A31F71D8F500707EA9 /* Models.swift */; };
 		32A622801F71BF4A00B36D4E /* CarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A6227E1F71BF4A00B36D4E /* CarCell.swift */; };
 		32A622811F71BF4A00B36D4E /* CarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A6227F1F71BF4A00B36D4E /* CarCell.xib */; };
+		32A622831F71CC5C00B36D4E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A622821F71CC5C00B36D4E /* API.swift */; };
 		32E1D1E41F71B87200FFEB0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */; };
 		32E1D1E61F71B87200FFEB0F /* FindCarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1E51F71B87200FFEB0F /* FindCarsViewController.swift */; };
 		32E1D1E81F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */; };
@@ -32,8 +36,12 @@
 
 /* Begin PBXFileReference section */
 		30EB70FBBD62053D638AF0DD /* Pods-fairTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fairTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-fairTests/Pods-fairTests.release.xcconfig"; sourceTree = "<group>"; };
+		3218F29F1F71D80300707EA9 /* Honda_Accord.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Honda_Accord.json; sourceTree = "<group>"; };
+		3218F2A01F71D80300707EA9 /* Honda.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Honda.json; sourceTree = "<group>"; };
+		3218F2A31F71D8F500707EA9 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		32A6227E1F71BF4A00B36D4E /* CarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCell.swift; sourceTree = SOURCE_ROOT; };
 		32A6227F1F71BF4A00B36D4E /* CarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarCell.xib; sourceTree = SOURCE_ROOT; };
+		32A622821F71CC5C00B36D4E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		32E1D1E01F71B87200FFEB0F /* fair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fair.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32E1D1E51F71B87200FFEB0F /* FindCarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindCarsViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +80,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3218F2A51F71D8FB00707EA9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				32A622821F71CC5C00B36D4E /* API.swift */,
+				3218F2A31F71D8F500707EA9 /* Models.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		32E1D1D71F71B87200FFEB0F = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +118,7 @@
 				32E1D1E91F71B87200FFEB0F /* Main.storyboard */,
 				32A6227E1F71BF4A00B36D4E /* CarCell.swift */,
 				32A6227F1F71BF4A00B36D4E /* CarCell.xib */,
+				3218F2A51F71D8FB00707EA9 /* Data */,
 				32E1D1EC1F71B87200FFEB0F /* Assets.xcassets */,
 				32E1D1EE1F71B87200FFEB0F /* LaunchScreen.storyboard */,
 				32E1D1F11F71B87200FFEB0F /* Info.plist */,
@@ -112,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				32E1D1FA1F71B87300FFEB0F /* fairTests.swift */,
+				3218F2A01F71D80300707EA9 /* Honda.json */,
+				3218F29F1F71D80300707EA9 /* Honda_Accord.json */,
 				32E1D1FC1F71B87300FFEB0F /* Info.plist */,
 			);
 			path = fairTests;
@@ -237,6 +257,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3218F2A21F71D80300707EA9 /* Honda.json in Resources */,
+				3218F2A11F71D80300707EA9 /* Honda_Accord.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,11 +337,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-fair/Pods-fair-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -354,7 +378,9 @@
 				32E1D1E81F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift in Sources */,
 				32E1D1E41F71B87200FFEB0F /* AppDelegate.swift in Sources */,
 				32A622801F71BF4A00B36D4E /* CarCell.swift in Sources */,
+				3218F2A41F71D8F500707EA9 /* Models.swift in Sources */,
 				32E1D1E61F71B87200FFEB0F /* FindCarsViewController.swift in Sources */,
+				32A622831F71CC5C00B36D4E /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
