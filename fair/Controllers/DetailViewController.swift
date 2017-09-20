@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SDWebImage
 
-typealias ImageUrlPair = (image1: String, image2: String)
+typealias ImageUrlPair = (image1: URL, image2: URL)
 
-class DetailViewController: UIViewController {
+class DetailViewController: UITableViewController {
 
     public var make: Make?
     public var model: Model?
@@ -24,7 +25,7 @@ class DetailViewController: UIViewController {
     
     private var imageUrls: ImageUrlPair? {
         didSet {
-            //
+            tableView.reloadData()
         }
     }
     
@@ -47,8 +48,8 @@ class DetailViewController: UIViewController {
     func fetchImages() {
         guard let make = make, let model = model, let submodel = submodel else { return }
         func constructUrls(year: String, make: String, model: String) -> ImageUrlPair {
-            let image1 = "https://a.tcimg.net/v/model_images/v1/\(year)/\(make)/\(model)/all/360x185/side"
-            let image2 = "https://a.tcimg.net/v/model_images/v1/\(year)/\(make)/\(model)/all/360x185/f3q"
+            let image1 = URL(string: "https://a.tcimg.net/v/model_images/v1/\(year)/\(make)/\(model)/all/360x185/side")!
+            let image2 = URL(string: "https://a.tcimg.net/v/model_images/v1/\(year)/\(make)/\(model)/all/360x185/f3q")!
             return (image1, image2)
         }
         imageUrls = constructUrls(year: "\(submodel.year)", make: make.niceName, model: model.niceName)
@@ -79,5 +80,43 @@ class DetailViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+}
+
+extension DetailViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //
+    }
+}
+
+extension DetailViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCellReuseIdentifier", for: indexPath) as! ImageCollectionViewCell
+        switch indexPath.row {
+        case 0:
+            cell.imageView.sd_setImage(with: imageUrls?.image1 , completed: nil)
+        case 1:
+            cell.imageView.sd_setImage(with: imageUrls?.image2 , completed: nil)
+        default: break
+        }
+        
+        
+        return cell
+    }
+}
+
+extension DetailViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.size.width, height: 100)
     }
 }

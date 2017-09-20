@@ -22,11 +22,11 @@
 		32CFB07D1F72F06B0043E6C7 /* Overview.json in Resources */ = {isa = PBXBuildFile; fileRef = 32CFB07C1F72F06A0043E6C7 /* Overview.json */; };
 		32CFB07F1F72F0A30043E6C7 /* Articles.json in Resources */ = {isa = PBXBuildFile; fileRef = 32CFB07E1F72F0A30043E6C7 /* Articles.json */; };
 		32E1D1E41F71B87200FFEB0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */; };
-		32E1D1E81F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */; };
 		32E1D1EB1F71B87200FFEB0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E1D1E91F71B87200FFEB0F /* Main.storyboard */; };
 		32E1D1ED1F71B87200FFEB0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E1D1EC1F71B87200FFEB0F /* Assets.xcassets */; };
 		32E1D1F01F71B87200FFEB0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E1D1EE1F71B87200FFEB0F /* LaunchScreen.storyboard */; };
 		32E1D1FB1F71B87300FFEB0F /* fairTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1FA1F71B87300FFEB0F /* fairTests.swift */; };
+		32E7547D1F7306C9002D8BCF /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E7547C1F7306C9002D8BCF /* ImageCollectionViewCell.swift */; };
 		634E08590767ACAD75C345E2 /* Pods_fair.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 911BE0BA7D0E823F02AE806C /* Pods_fair.framework */; };
 		FACD0D8EB39CC893F200BA4C /* Pods_fairTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D913E51D379B8A3381567E55 /* Pods_fairTests.framework */; };
 /* End PBXBuildFile section */
@@ -59,7 +59,6 @@
 		32CFB07E1F72F0A30043E6C7 /* Articles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Articles.json; sourceTree = "<group>"; };
 		32E1D1E01F71B87200FFEB0F /* fair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fair.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCarsViewConrtroller.swift; sourceTree = "<group>"; };
 		32E1D1EA1F71B87200FFEB0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		32E1D1EC1F71B87200FFEB0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32E1D1EF1F71B87200FFEB0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		32E1D1F61F71B87300FFEB0F /* fairTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fairTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E1D1FA1F71B87300FFEB0F /* fairTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fairTests.swift; sourceTree = "<group>"; };
 		32E1D1FC1F71B87300FFEB0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32E7547C1F7306C9002D8BCF /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		911BE0BA7D0E823F02AE806C /* Pods_fair.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fair.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A362C29FE114CDC7FFC09713 /* Pods-fair.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fair.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fair/Pods-fair.debug.xcconfig"; sourceTree = "<group>"; };
 		D31DA8D33D0A69B2703B927D /* Pods-fair.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fair.release.xcconfig"; path = "Pods/Target Support Files/Pods-fair/Pods-fair.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 				32C0E2851F720CFF000D092F /* ModelViewController.swift */,
 				32CFB0771F722DAB0043E6C7 /* SubmodelViewController.swift */,
 				3218F2A81F72071800707EA9 /* DetailViewController.swift */,
-				32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */,
+				32E7547C1F7306C9002D8BCF /* ImageCollectionViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -409,8 +409,8 @@
 			files = (
 				32B02D591F72F718003E3019 /* Overview.swift in Sources */,
 				32CFB07B1F72E46A0043E6C7 /* Article.swift in Sources */,
+				32E7547D1F7306C9002D8BCF /* ImageCollectionViewCell.swift in Sources */,
 				32C0E2881F72113E000D092F /* Model.swift in Sources */,
-				32E1D1E81F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift in Sources */,
 				32E1D1E41F71B87200FFEB0F /* AppDelegate.swift in Sources */,
 				32CFB0781F722DAB0043E6C7 /* SubmodelViewController.swift in Sources */,
 				3218F2A41F71D8F500707EA9 /* Make.swift in Sources */,
