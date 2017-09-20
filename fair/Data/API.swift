@@ -14,22 +14,21 @@ typealias DefaultRequestCompletion = (JSON) -> Void
 typealias RequestErrorCompletion = (RequestError) -> Void
 
 enum Endpoint {
-    case search(makeModel: String)
+    case fetchMakes()
+    case fetchMake(make: String)
+    case fetchModel(model: String, make: String)
 }
 
 extension Endpoint {
     var rawValue: CallInfo {
         get {
             switch self {
-            case .search(let makeModel):
-                let splitString = makeModel.components(separatedBy: " ")
-                switch splitString.count {
-                case 1: return CallInfo(.get, path: splitString[0], params: nil)
-                case 2: return CallInfo(.get, path: "\(splitString[0])/\(splitString[1])", params: nil)
-                default:
-                    print("Error in \(#function)") // TODO : Proper error handling
-                    return CallInfo(.get, path: makeModel, params: nil)
-                }
+            case .fetchMakes():
+                return CallInfo(.get, path: "makes", params : ["state" : "new", "view" : "basic"])
+            case .fetchMake(let make):
+                return CallInfo(.get, path: make)
+            case .fetchModel(let model, let make):
+                return CallInfo(.get, path: "\(make)/\(model)")
             }
         }
     }
@@ -47,16 +46,16 @@ struct CallInfo {
     let path: String
     let params: [String : Any]?
     
+    init(_ method: HTTPMethod, path: String) {
+        self.init(method, path: path, params: nil)
+    }
+    
     init(_ method: HTTPMethod, path: String, params: [String : Any]?) {
         self.method = method
         self.path = path
         var newParams: [String: Any] = params ?? [:]
         newParams["api_key"] = API.Key // Add API key
         self.params = newParams
-    }
-    
-    init(_ method: HTTPMethod, path: String) {
-        self.init(method, path: path, params: nil)
     }
 }
 
