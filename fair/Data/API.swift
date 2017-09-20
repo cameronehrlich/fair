@@ -21,7 +21,7 @@ enum BaseURLType: String {
 
 struct API {
     
-    static let Key          = "ke2d4cv925rhhzgmkvmt755u"
+    static let Key = "ke2d4cv925rhhzgmkvmt755u"
     
     @discardableResult
     static func request(_ endpoint: Endpoint, completion: @escaping DefaultRequestCompletion, failure: @escaping RequestErrorCompletion) -> DataRequest {
@@ -76,7 +76,8 @@ enum Endpoint {
     case fetchMake(make: String)
     case fetchModel(model: String, make: String)
     case fetchImages(make: String, model: String, year: String?)
-    case fetchArticles(make: String, model: String, year: String?)
+    case fetchOverview(make: String, model: String, year: String?)
+    case fetchArticles(tag: String)
 }
 
 extension Endpoint {
@@ -91,8 +92,10 @@ extension Endpoint {
                 return CallInfo(.get, path: "\(make)/\(model)")
             case .fetchImages(let make, let model, let year):
                 return CallInfo(.get, path: "\(make)/\(model)/\(year ?? "")", params: nil, endpointType: .media)
-            case .fetchArticles(let make, let model, let year):
+            case .fetchOverview(let make, let model, let year):
                 return CallInfo(.get, path: "\(make)/\(model)/\(year ?? "")", params: nil, endpointType: .editorial)
+            case .fetchArticles(let tag):
+                return CallInfo(.get, path: "articles", params: ["tag" : tag], endpointType: .editorial)
             }
         }
     }

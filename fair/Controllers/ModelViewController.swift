@@ -17,12 +17,14 @@ class ModelViewController: UIViewController {
     
     var models: [Model] = [] {
         didSet {
+            models.sort {$0.niceName < $1.niceName }
             tableView.reloadData()
         }
     }
     
     var searchResults: [Model] = [] {
         didSet {
+            models.sort { $0.niceName < $1.niceName }
             tableView.reloadData()
         }
     }
@@ -41,12 +43,7 @@ class ModelViewController: UIViewController {
         if segue.identifier == "model-submodel" {
             let nextScene = segue.destination as! SubmodelViewController
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                var model: Model?
-                if searchResults.count > 0 {
-                    model = searchResults[indexPath.row]
-                } else {
-                    model = models[indexPath.row]
-                }
+                let model: Model? = (searchResults.count > 0) ? searchResults[indexPath.row] : models[indexPath.row]
                 nextScene.make = make
                 nextScene.model = model
             }
@@ -59,7 +56,7 @@ class ModelViewController: UIViewController {
     
     func searchMakes(make: String?) {
         if let make = make {
-            self.searchResults = models.filter { $0.niceName.contains(make.lowercased()) }.sorted { $0.niceName < $1.niceName }
+            searchResults = models.filter { $0.niceName.contains(make.lowercased()) }
         }
     }
     
@@ -69,7 +66,7 @@ class ModelViewController: UIViewController {
                 let tmpModels = models.arrayValue.map { jsonCar -> Model in
                     return Model(json: jsonCar)
                 }
-                self.models = tmpModels.sorted {$0.niceName < $1.niceName }
+                self.models = tmpModels
             }
         }) { error in
             print(error)
@@ -109,14 +106,7 @@ extension ModelViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ModelCell", for: indexPath)
-        
-        var car: Model?
-        if searchResults.count > 0 {
-            car = searchResults[indexPath.row]
-        } else {
-            car = models[indexPath.row]
-        }
-        
+        let car: Model? = (searchResults.count > 0) ? searchResults[indexPath.row] : models[indexPath.row]
         if let car = car {
             cell.textLabel?.text = car.niceName.capitalized
         }

@@ -17,6 +17,9 @@
 		32C0E2881F72113E000D092F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C0E2871F72113E000D092F /* Model.swift */; };
 		32C0E28A1F72129C000D092F /* Submodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C0E2891F72129C000D092F /* Submodel.swift */; };
 		32CFB0781F722DAB0043E6C7 /* SubmodelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CFB0771F722DAB0043E6C7 /* SubmodelViewController.swift */; };
+		32CFB07B1F72E46A0043E6C7 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CFB07A1F72E46A0043E6C7 /* Article.swift */; };
+		32CFB07D1F72F06B0043E6C7 /* Overview.json in Resources */ = {isa = PBXBuildFile; fileRef = 32CFB07C1F72F06A0043E6C7 /* Overview.json */; };
+		32CFB07F1F72F0A30043E6C7 /* Articles.json in Resources */ = {isa = PBXBuildFile; fileRef = 32CFB07E1F72F0A30043E6C7 /* Articles.json */; };
 		32E1D1E41F71B87200FFEB0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */; };
 		32E1D1E81F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */; };
 		32E1D1EB1F71B87200FFEB0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E1D1E91F71B87200FFEB0F /* Main.storyboard */; };
@@ -49,6 +52,9 @@
 		32C0E2871F72113E000D092F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		32C0E2891F72129C000D092F /* Submodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Submodel.swift; sourceTree = "<group>"; };
 		32CFB0771F722DAB0043E6C7 /* SubmodelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmodelViewController.swift; sourceTree = "<group>"; };
+		32CFB07A1F72E46A0043E6C7 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		32CFB07C1F72F06A0043E6C7 /* Overview.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Overview.json; sourceTree = "<group>"; };
+		32CFB07E1F72F0A30043E6C7 /* Articles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Articles.json; sourceTree = "<group>"; };
 		32E1D1E01F71B87200FFEB0F /* fair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fair.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCarsViewConrtroller.swift; sourceTree = "<group>"; };
@@ -93,6 +99,7 @@
 				3218F2A31F71D8F500707EA9 /* Make.swift */,
 				32C0E2871F72113E000D092F /* Model.swift */,
 				32C0E2891F72129C000D092F /* Submodel.swift */,
+				32CFB07A1F72E46A0043E6C7 /* Article.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -148,6 +155,8 @@
 			children = (
 				32E1D1FA1F71B87300FFEB0F /* fairTests.swift */,
 				3218F2A01F71D80300707EA9 /* Honda.json */,
+				32CFB07C1F72F06A0043E6C7 /* Overview.json */,
+				32CFB07E1F72F0A30043E6C7 /* Articles.json */,
 				3218F29F1F71D80300707EA9 /* Honda_Accord.json */,
 				32E1D1FC1F71B87300FFEB0F /* Info.plist */,
 			);
@@ -273,8 +282,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32CFB07F1F72F0A30043E6C7 /* Articles.json in Resources */,
 				3218F2A21F71D80300707EA9 /* Honda.json in Resources */,
 				3218F2A11F71D80300707EA9 /* Honda_Accord.json in Resources */,
+				32CFB07D1F72F06B0043E6C7 /* Overview.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32CFB07B1F72E46A0043E6C7 /* Article.swift in Sources */,
 				32C0E2881F72113E000D092F /* Model.swift in Sources */,
 				32E1D1E81F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift in Sources */,
 				32E1D1E41F71B87200FFEB0F /* AppDelegate.swift in Sources */,

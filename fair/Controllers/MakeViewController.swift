@@ -37,12 +37,7 @@ class MakeViewController: UIViewController {
         if segue.identifier == "make-model" {
             let nextScene = segue.destination as! ModelViewController
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                var make: Make?
-                if searchResults.count > 0 {
-                    make = searchResults[indexPath.row]
-                } else {
-                    make = makes[indexPath.row]
-                }
+                let make: Make? = (searchResults.count > 0) ? searchResults[indexPath.row] : makes[indexPath.row]
                 nextScene.make = make
             }
         }
@@ -64,7 +59,6 @@ class MakeViewController: UIViewController {
                 let tmpMakes = makes.arrayValue.map { jsonCar -> Make in
                     return Make(json: jsonCar)
                 }
-                
                 self.makes = tmpMakes.sorted{ $0.niceName < $1.niceName }
             }
         }) { error in
