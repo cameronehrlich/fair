@@ -26,7 +26,7 @@ extension Endpoint {
             case .fetchMakes():
                 return CallInfo(.get, path: "makes", params : ["state" : "new", "view" : "basic"])
             case .fetchMake(let make):
-                return CallInfo(.get, path: make)
+                return CallInfo(.get, path: "\(make)/models")
             case .fetchModel(let model, let make):
                 return CallInfo(.get, path: "\(make)/\(model)")
             }

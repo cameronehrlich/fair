@@ -9,25 +9,22 @@
 import Foundation
 import SwiftyJSON
 
-struct Car {
+struct Make {
     let name: String
     let niceName: String
-    let id: Int
 }
 
-extension Car {
+extension Make {
     enum JSONFields: String {
         case
         name = "name",
-        niceName = "niceName",
-        id = "id"
+        niceName = "niceName"
     }
 }
 
-extension Car {
+extension Make {
     init(json: JSON) {
         name = json[JSONFields.name.rawValue].stringValue
         niceName = json[JSONFields.niceName.rawValue].stringValue
-        id = json[JSONFields.id.rawValue].intValue
     }
 }

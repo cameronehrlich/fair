@@ -1,5 +1,5 @@
 //
-//  ChooseModelViewController.swift
+//  ModelViewController.swift
 //  fair
 //
 //  Created by Cameron Ehrlich on 9/19/17.
@@ -8,33 +8,59 @@
 
 import UIKit
 
-class ChooseModelViewController: UIViewController {
+class ModelViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    public var make: Car?
+    public var make: Make?
     
-    var models: [Car] = [] {
+    var models: [Model] = [] {
         didSet {
-            self.tableView.reloadData()
+            tableView.reloadData()
         }
     }
     
-    var searchResults: [Car] = [] {
+    var searchResults: [Model] = [] {
         didSet {
-            self.tableView.reloadData()
+            tableView.reloadData()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .white
         tableView.keyboardDismissMode = .interactive
-        
         if let make = make {
             title = "\(make.name) Models"
             fetchMake(make: make.niceName)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "model-detail" {
+            let nextScene = segue.destination as! DetailViewController
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                var model: Model?
+                if searchResults.count > 0 {
+                    model = searchResults[indexPath.row]
+                } else {
+                    model = models[indexPath.row]
+                }
+                
+                nextScene.model = model
+                var modelsByYear: [Int:[Submodel]] = [:]
+                let years = Set(model!.submodels.map{ $0.year})
+                for year in years {
+                    var yearsSubmodels: [Submodel] = []
+                    for sm in model!.submodels {
+                        yearsSubmodels.append(sm)
+                    }
+                    modelsByYear[year] = yearsSubmodels
+                }
+                
+                print(modelsByYear)
+            }
         }
     }
     
@@ -49,29 +75,29 @@ class ChooseModelViewController: UIViewController {
     }
     
     func fetchMake(make: String) {
-        API.request(.fetchMake(make: make), completion: { (json) in
-            if let makes = json.dictionaryValue["models"] {
-                let tmpMakes = makes.arrayValue.map { jsonCar -> Car in
-                    return Car(json: jsonCar)
+        API.request(.fetchMake(make: make), completion: { json in
+            if let models = json.dictionaryValue["models"] {
+                let tmpModels = models.arrayValue.map { jsonCar -> Model in
+                    return Model(json: jsonCar)
                 }
-                self.models = tmpMakes
+                self.models = tmpModels
             }
-        }) { (error) in
+        }) { error in
             print(error)
         }
     }
 }
 
-extension ChooseModelViewController: UITableViewDelegate {
+extension ModelViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO : Push detail controller
+        performSegue(withIdentifier: "model-detail", sender: self)
         searchBar.resignFirstResponder()
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
-extension ChooseModelViewController: UITableViewDataSource {
+extension ModelViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -95,7 +121,7 @@ extension ChooseModelViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ModelCell", for: indexPath)
         
-        var car: Car?
+        var car: Model?
         if searchResults.count > 0 {
             car = searchResults[indexPath.row]
         } else {
@@ -109,7 +135,7 @@ extension ChooseModelViewController: UITableViewDataSource {
     }
 }
 
-extension ChooseModelViewController: UISearchBarDelegate {
+extension ModelViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchMakes(make: searchBar.text)

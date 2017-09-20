@@ -1,5 +1,5 @@
 //
-//  ChooseMakeViewController.swift
+//  MakeViewController.swift
 //  fair
 //
 //  Created by Cameron Ehrlich on 9/19/17.
@@ -8,25 +8,26 @@
 
 import UIKit
 
-class ChooseMakeViewController: UIViewController {
+class MakeViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var makes: [Car] = [] {
+    var makes: [Make] = [] {
         didSet {
-            self.tableView.reloadData()
+            tableView.reloadData()
         }
     }
     
-    var searchResults: [Car] = [] {
+    var searchResults: [Make] = [] {
         didSet {
-            self.tableView.reloadData()
+            tableView.reloadData()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         tableView.keyboardDismissMode = .interactive
         title = "Select Make"
         fetchMakes()
@@ -34,10 +35,9 @@ class ChooseMakeViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "make-model" {
-            let nextScene = segue.destination as! ChooseModelViewController
-            
+            let nextScene = segue.destination as! ModelViewController
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                var make: Car?
+                var make: Make?
                 if searchResults.count > 0 {
                     make = searchResults[indexPath.row]
                 } else {
@@ -59,20 +59,20 @@ class ChooseMakeViewController: UIViewController {
     }
     
     func fetchMakes() {
-        API.request(.fetchMakes(), completion: { (json) in
+        API.request(.fetchMakes(), completion: { json in
             if let makes = json.dictionaryValue["makes"] {
-                let tmpMakes = makes.arrayValue.map { jsonCar -> Car in
-                    return Car(json: jsonCar)
+                let tmpMakes = makes.arrayValue.map { jsonCar -> Make in
+                    return Make(json: jsonCar)
                 }
                 self.makes = tmpMakes
             }
-        }) { (error) in
+        }) { error in
             print(error)
         }
     }
 }
 
-extension ChooseMakeViewController: UITableViewDelegate {
+extension MakeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "make-model", sender: nil)
@@ -81,7 +81,7 @@ extension ChooseMakeViewController: UITableViewDelegate {
     }
 }
 
-extension ChooseMakeViewController: UITableViewDataSource {
+extension MakeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -105,7 +105,7 @@ extension ChooseMakeViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MakeCell", for: indexPath)
 
-        var car: Car?
+        var car: Make?
         if searchResults.count > 0 {
             car = searchResults[indexPath.row]
         } else {
@@ -119,7 +119,7 @@ extension ChooseMakeViewController: UITableViewDataSource {
     }
 }
 
-extension ChooseMakeViewController: UISearchBarDelegate {
+extension MakeViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchMakes(make: searchBar.text)

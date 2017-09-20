@@ -13,7 +13,7 @@
         <!--Find-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController title="Find" id="9pv-A4-QxB" customClass="ChooseMakeViewController" customModule="fair" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Find" id="9pv-A4-QxB" customClass="MakeViewController" customModule="fair" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -141,7 +141,7 @@
         <!--Details-->
         <scene sceneID="BXA-R8-j0D">
             <objects>
-                <viewController title="Details" hidesBottomBarWhenPushed="YES" id="Dl9-5L-sA3" sceneMemberID="viewController">
+                <viewController title="Details" hidesBottomBarWhenPushed="YES" id="Dl9-5L-sA3" customClass="DetailViewController" customModule="fair" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e9w-gN-wCx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -152,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bj8-dv-qUR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3470" y="95"/>
+            <point key="canvasLocation" x="3058" y="-13"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -216,13 +216,13 @@
         <!--Choose Model-->
         <scene sceneID="xuR-21-lD4">
             <objects>
-                <viewController id="kEn-yi-GNe" userLabel="Choose Model" customClass="ChooseModelViewController" customModule="fair" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="kEn-yi-GNe" userLabel="Choose Model" customClass="ModelViewController" customModule="fair" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="baA-La-SOg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1A6-sc-btS">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" text="" placeholder="&quot;Accord&quot;" id="XL9-Vx-YBM">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>

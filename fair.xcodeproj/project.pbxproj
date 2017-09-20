@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		3218F2A11F71D80300707EA9 /* Honda_Accord.json in Resources */ = {isa = PBXBuildFile; fileRef = 3218F29F1F71D80300707EA9 /* Honda_Accord.json */; };
 		3218F2A21F71D80300707EA9 /* Honda.json in Resources */ = {isa = PBXBuildFile; fileRef = 3218F2A01F71D80300707EA9 /* Honda.json */; };
-		3218F2A41F71D8F500707EA9 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218F2A31F71D8F500707EA9 /* Models.swift */; };
-		3218F2A71F71FDFE00707EA9 /* ChooseModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218F2A61F71FDFE00707EA9 /* ChooseModelViewController.swift */; };
+		3218F2A41F71D8F500707EA9 /* Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218F2A31F71D8F500707EA9 /* Make.swift */; };
+		3218F2A91F72071800707EA9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218F2A81F72071800707EA9 /* DetailViewController.swift */; };
+		3218F2AB1F720CC300707EA9 /* MakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218F2AA1F720CC300707EA9 /* MakeViewController.swift */; };
 		32A622801F71BF4A00B36D4E /* CarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A6227E1F71BF4A00B36D4E /* CarCell.swift */; };
 		32A622811F71BF4A00B36D4E /* CarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A6227F1F71BF4A00B36D4E /* CarCell.xib */; };
 		32A622831F71CC5C00B36D4E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A622821F71CC5C00B36D4E /* API.swift */; };
+		32C0E2861F720CFF000D092F /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C0E2851F720CFF000D092F /* ModelViewController.swift */; };
+		32C0E2881F72113E000D092F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C0E2871F72113E000D092F /* Model.swift */; };
+		32C0E28A1F72129C000D092F /* Submodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C0E2891F72129C000D092F /* Submodel.swift */; };
 		32E1D1E41F71B87200FFEB0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */; };
-		32E1D1E61F71B87200FFEB0F /* ChooseMakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1E51F71B87200FFEB0F /* ChooseMakeViewController.swift */; };
 		32E1D1E81F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */; };
 		32E1D1EB1F71B87200FFEB0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E1D1E91F71B87200FFEB0F /* Main.storyboard */; };
 		32E1D1ED1F71B87200FFEB0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32E1D1EC1F71B87200FFEB0F /* Assets.xcassets */; };
@@ -39,14 +42,17 @@
 		30EB70FBBD62053D638AF0DD /* Pods-fairTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fairTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-fairTests/Pods-fairTests.release.xcconfig"; sourceTree = "<group>"; };
 		3218F29F1F71D80300707EA9 /* Honda_Accord.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Honda_Accord.json; sourceTree = "<group>"; };
 		3218F2A01F71D80300707EA9 /* Honda.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Honda.json; sourceTree = "<group>"; };
-		3218F2A31F71D8F500707EA9 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		3218F2A61F71FDFE00707EA9 /* ChooseModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseModelViewController.swift; sourceTree = "<group>"; };
+		3218F2A31F71D8F500707EA9 /* Make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Make.swift; sourceTree = "<group>"; };
+		3218F2A81F72071800707EA9 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		3218F2AA1F720CC300707EA9 /* MakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeViewController.swift; sourceTree = "<group>"; };
 		32A6227E1F71BF4A00B36D4E /* CarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCell.swift; sourceTree = SOURCE_ROOT; };
 		32A6227F1F71BF4A00B36D4E /* CarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarCell.xib; sourceTree = SOURCE_ROOT; };
 		32A622821F71CC5C00B36D4E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		32C0E2851F720CFF000D092F /* ModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelViewController.swift; sourceTree = "<group>"; };
+		32C0E2871F72113E000D092F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		32C0E2891F72129C000D092F /* Submodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Submodel.swift; sourceTree = "<group>"; };
 		32E1D1E01F71B87200FFEB0F /* fair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fair.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		32E1D1E51F71B87200FFEB0F /* ChooseMakeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseMakeViewController.swift; sourceTree = "<group>"; };
 		32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCarsViewConrtroller.swift; sourceTree = "<group>"; };
 		32E1D1EA1F71B87200FFEB0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		32E1D1EC1F71B87200FFEB0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,7 +92,9 @@
 			isa = PBXGroup;
 			children = (
 				32A622821F71CC5C00B36D4E /* API.swift */,
-				3218F2A31F71D8F500707EA9 /* Models.swift */,
+				3218F2A31F71D8F500707EA9 /* Make.swift */,
+				32C0E2871F72113E000D092F /* Model.swift */,
+				32C0E2891F72129C000D092F /* Submodel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -115,8 +123,9 @@
 			isa = PBXGroup;
 			children = (
 				32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */,
-				32E1D1E51F71B87200FFEB0F /* ChooseMakeViewController.swift */,
-				3218F2A61F71FDFE00707EA9 /* ChooseModelViewController.swift */,
+				3218F2AA1F720CC300707EA9 /* MakeViewController.swift */,
+				32C0E2851F720CFF000D092F /* ModelViewController.swift */,
+				3218F2A81F72071800707EA9 /* DetailViewController.swift */,
 				32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */,
 				32E1D1E91F71B87200FFEB0F /* Main.storyboard */,
 				32A6227E1F71BF4A00B36D4E /* CarCell.swift */,
@@ -378,13 +387,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32C0E2881F72113E000D092F /* Model.swift in Sources */,
 				32E1D1E81F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift in Sources */,
-				3218F2A71F71FDFE00707EA9 /* ChooseModelViewController.swift in Sources */,
 				32E1D1E41F71B87200FFEB0F /* AppDelegate.swift in Sources */,
 				32A622801F71BF4A00B36D4E /* CarCell.swift in Sources */,
-				3218F2A41F71D8F500707EA9 /* Models.swift in Sources */,
-				32E1D1E61F71B87200FFEB0F /* ChooseMakeViewController.swift in Sources */,
+				3218F2A41F71D8F500707EA9 /* Make.swift in Sources */,
+				3218F2AB1F720CC300707EA9 /* MakeViewController.swift in Sources */,
+				32C0E2861F720CFF000D092F /* ModelViewController.swift in Sources */,
 				32A622831F71CC5C00B36D4E /* API.swift in Sources */,
+				32C0E28A1F72129C000D092F /* Submodel.swift in Sources */,
+				3218F2A91F72071800707EA9 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
