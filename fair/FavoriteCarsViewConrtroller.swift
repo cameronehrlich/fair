@@ -14,9 +14,6 @@ class FavoriteCarsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let cellNib = UINib(nibName: "CarCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: CarCell.reuseIdentifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,9 +43,7 @@ extension FavoriteCarsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CarCell.reuseIdentifier, for: indexPath) as! CarCell
-        cell.imgView.image = nil
-        cell.titleLabel.text = "Cell at index: \(indexPath.row)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath)
         return cell
     }
 }
