@@ -38,8 +38,8 @@ class ModelViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "model-detail" {
-            let nextScene = segue.destination as! DetailViewController
+        if segue.identifier == "model-submodel" {
+            let nextScene = segue.destination as! SubmodelViewController
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 var model: Model?
                 if searchResults.count > 0 {
@@ -49,17 +49,6 @@ class ModelViewController: UIViewController {
                 }
                 
                 nextScene.model = model
-                var modelsByYear: [Int:[Submodel]] = [:]
-                let years = Set(model!.submodels.map{ $0.year})
-                for year in years {
-                    var yearsSubmodels: [Submodel] = []
-                    for sm in model!.submodels {
-                        yearsSubmodels.append(sm)
-                    }
-                    modelsByYear[year] = yearsSubmodels
-                }
-                
-                print(modelsByYear)
             }
         }
     }
@@ -91,7 +80,7 @@ class ModelViewController: UIViewController {
 extension ModelViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "model-detail", sender: self)
+        performSegue(withIdentifier: "model-submodel", sender: self)
         searchBar.resignFirstResponder()
         tableView.deselectRow(at: indexPath, animated: true)
     }

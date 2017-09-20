@@ -16,6 +16,7 @@
 		32C0E2861F720CFF000D092F /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C0E2851F720CFF000D092F /* ModelViewController.swift */; };
 		32C0E2881F72113E000D092F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C0E2871F72113E000D092F /* Model.swift */; };
 		32C0E28A1F72129C000D092F /* Submodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C0E2891F72129C000D092F /* Submodel.swift */; };
+		32CFB0781F722DAB0043E6C7 /* SubmodelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CFB0771F722DAB0043E6C7 /* SubmodelViewController.swift */; };
 		32E1D1E41F71B87200FFEB0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */; };
 		32E1D1E81F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */; };
 		32E1D1EB1F71B87200FFEB0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E1D1E91F71B87200FFEB0F /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		32C0E2851F720CFF000D092F /* ModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelViewController.swift; sourceTree = "<group>"; };
 		32C0E2871F72113E000D092F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		32C0E2891F72129C000D092F /* Submodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Submodel.swift; sourceTree = "<group>"; };
+		32CFB0771F722DAB0043E6C7 /* SubmodelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmodelViewController.swift; sourceTree = "<group>"; };
 		32E1D1E01F71B87200FFEB0F /* fair.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fair.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCarsViewConrtroller.swift; sourceTree = "<group>"; };
@@ -95,6 +97,18 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		32CFB0791F722DBF0043E6C7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3218F2AA1F720CC300707EA9 /* MakeViewController.swift */,
+				32C0E2851F720CFF000D092F /* ModelViewController.swift */,
+				32CFB0771F722DAB0043E6C7 /* SubmodelViewController.swift */,
+				3218F2A81F72071800707EA9 /* DetailViewController.swift */,
+				32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		32E1D1D71F71B87200FFEB0F = {
 			isa = PBXGroup;
 			children = (
@@ -118,12 +132,9 @@
 		32E1D1E21F71B87200FFEB0F /* fair */ = {
 			isa = PBXGroup;
 			children = (
-				32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */,
-				3218F2AA1F720CC300707EA9 /* MakeViewController.swift */,
-				32C0E2851F720CFF000D092F /* ModelViewController.swift */,
-				3218F2A81F72071800707EA9 /* DetailViewController.swift */,
-				32E1D1E71F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift */,
 				32E1D1E91F71B87200FFEB0F /* Main.storyboard */,
+				32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */,
+				32CFB0791F722DBF0043E6C7 /* Controllers */,
 				3218F2A51F71D8FB00707EA9 /* Data */,
 				32E1D1EC1F71B87200FFEB0F /* Assets.xcassets */,
 				32E1D1EE1F71B87200FFEB0F /* LaunchScreen.storyboard */,
@@ -383,6 +394,7 @@
 				32C0E2881F72113E000D092F /* Model.swift in Sources */,
 				32E1D1E81F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift in Sources */,
 				32E1D1E41F71B87200FFEB0F /* AppDelegate.swift in Sources */,
+				32CFB0781F722DAB0043E6C7 /* SubmodelViewController.swift in Sources */,
 				3218F2A41F71D8F500707EA9 /* Make.swift in Sources */,
 				3218F2AB1F720CC300707EA9 /* MakeViewController.swift in Sources */,
 				32C0E2861F720CFF000D092F /* ModelViewController.swift in Sources */,
