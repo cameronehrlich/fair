@@ -47,7 +47,7 @@ class ModelViewController: UIViewController {
                 } else {
                     model = models[indexPath.row]
                 }
-                
+                nextScene.make = make
                 nextScene.model = model
             }
         }

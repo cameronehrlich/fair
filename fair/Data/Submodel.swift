@@ -16,6 +16,10 @@ struct Submodel {
     let trim: String
     let body: String
     let modelName: String
+    
+    var detailText: String {
+        return "\(modelName), \(trim), \(body)"
+    }
 }
 
 extension Submodel {

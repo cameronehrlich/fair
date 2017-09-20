@@ -14,24 +14,26 @@ class SubmodelViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    public var make: Make?
+    
     public var model: Model? = nil {
         didSet {
-            var tmpSubmodelsByYear: [YearSubmodelsPair] = []
-            let years = Set(model!.submodels.map{ $0.year })
-            for year in years {
-                var yearsSubmodels: [Submodel] = []
-                for sm in model!.submodels {
-                    yearsSubmodels.append(sm)
+            if let model = model {
+                let years = Array(Set(model.submodels.map { $0.year })).sorted { $0 > $1 }
+                subModelsByYear = years.map { (year: Int) -> YearSubmodelsPair in
+                    return (year, model.submodels.filter { (submodel: Submodel) in
+                        return submodel.year == year
+                    })
                 }
-                yearsSubmodels = Array(Set(yearsSubmodels))
-                let yearPair: YearSubmodelsPair = (year, yearsSubmodels.sorted { $0.name < $1.name })
-                tmpSubmodelsByYear.append(yearPair)
             }
-            subModelsByYear = tmpSubmodelsByYear.sorted{ $0.year > $1.year }
         }
     }
     
-    private var subModelsByYear: [YearSubmodelsPair] = []
+    private var subModelsByYear: [YearSubmodelsPair] = [] {
+        didSet {
+            subModelsByYear.sort { $0.year > $1.year }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,18 @@ class SubmodelViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "submodel-detail" {
+            let destination = segue.destination as! DetailViewController
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let submodel = subModelsByYear[indexPath.section].submodels[indexPath.row]
+                destination.submodel = submodel
+                destination.make = make
+                destination.model = model
+            }
+        }
     }
 }
 
@@ -64,11 +78,11 @@ extension SubmodelViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubmodelCell", for: indexPath)
         let submodel: Submodel = subModelsByYear[indexPath.section].submodels[indexPath.row]
         cell.textLabel?.text = submodel.name
-        cell.detailTextLabel?.text = "\(submodel.modelName)/, \(submodel.trim), \(submodel.body)"
+        cell.detailTextLabel?.text = submodel.detailText
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "\(subModelsByYear[section].0)"
+        return "\(subModelsByYear[section].year)"
     }
 }

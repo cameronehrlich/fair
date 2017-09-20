@@ -54,7 +54,7 @@ class MakeViewController: UIViewController {
     
     func searchMakes(make: String?) {
         if let make = make {
-            self.searchResults = makes.filter { $0.niceName.contains(make.lowercased()) }.sorted { $0.niceName < $1.niceName }
+            searchResults = makes.filter { $0.niceName.contains(make.lowercased()) }.sorted { $0.niceName < $1.niceName }
         }
     }
     
