@@ -54,7 +54,7 @@ class MakeViewController: UIViewController {
     
     func searchMakes(make: String?) {
         if let make = make {
-            self.searchResults = makes.filter { $0.niceName.contains(make.lowercased()) }
+            self.searchResults = makes.filter { $0.niceName.contains(make.lowercased()) }.sorted { $0.niceName < $1.niceName }
         }
     }
     
@@ -64,7 +64,8 @@ class MakeViewController: UIViewController {
                 let tmpMakes = makes.arrayValue.map { jsonCar -> Make in
                     return Make(json: jsonCar)
                 }
-                self.makes = tmpMakes
+                
+                self.makes = tmpMakes.sorted{ $0.niceName < $1.niceName }
             }
         }) { error in
             print(error)

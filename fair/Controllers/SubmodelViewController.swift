@@ -23,8 +23,9 @@ class SubmodelViewController: UIViewController {
                 for sm in model!.submodels {
                     yearsSubmodels.append(sm)
                 }
-                let yearPar: YearSubmodelsPair = (year, yearsSubmodels)
-                tmpSubmodelsByYear.append(yearPar)
+                yearsSubmodels = Array(Set(yearsSubmodels))
+                let yearPair: YearSubmodelsPair = (year, yearsSubmodels.sorted { $0.name < $1.name })
+                tmpSubmodelsByYear.append(yearPair)
             }
             subModelsByYear = tmpSubmodelsByYear.sorted{ $0.year > $1.year }
         }
@@ -63,6 +64,7 @@ extension SubmodelViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubmodelCell", for: indexPath)
         let submodel: Submodel = subModelsByYear[indexPath.section].submodels[indexPath.row]
         cell.textLabel?.text = submodel.name
+        cell.detailTextLabel?.text = "\(submodel.modelName)/, \(submodel.trim), \(submodel.body)"
         return cell
     }
     

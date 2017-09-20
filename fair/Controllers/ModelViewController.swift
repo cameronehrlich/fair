@@ -59,7 +59,7 @@ class ModelViewController: UIViewController {
     
     func searchMakes(make: String?) {
         if let make = make {
-            self.searchResults = models.filter { $0.niceName.contains(make.lowercased()) }
+            self.searchResults = models.filter { $0.niceName.contains(make.lowercased()) }.sorted { $0.niceName < $1.niceName }
         }
     }
     
@@ -69,7 +69,7 @@ class ModelViewController: UIViewController {
                 let tmpModels = models.arrayValue.map { jsonCar -> Model in
                     return Model(json: jsonCar)
                 }
-                self.models = tmpModels
+                self.models = tmpModels.sorted {$0.niceName < $1.niceName }
             }
         }) { error in
             print(error)

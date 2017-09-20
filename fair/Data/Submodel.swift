@@ -40,3 +40,23 @@ extension Submodel {
         modelName = json[JSONFields.modelName.rawValue].stringValue
     }
 }
+
+extension Submodel: Hashable {
+    var hashValue: Int {
+        return name.hashValue
+            ^ niceName.hashValue
+            ^ year.hashValue
+            ^ trim.hashValue
+            ^ body.hashValue
+            ^ modelName.hashValue
+    }
+    
+    static func ==(lhs: Submodel, rhs: Submodel) -> Bool {
+        return lhs.name == rhs.name
+            && lhs.niceName == rhs.niceName
+            && lhs.year == rhs.year
+            && lhs.trim == rhs.trim
+            && lhs.body == rhs.body
+            && lhs.modelName == rhs.modelName
+    }
+}
