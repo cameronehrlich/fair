@@ -13,6 +13,7 @@
 		3218F2A91F72071800707EA9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218F2A81F72071800707EA9 /* DetailViewController.swift */; };
 		3218F2AB1F720CC300707EA9 /* MakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218F2AA1F720CC300707EA9 /* MakeViewController.swift */; };
 		32A622831F71CC5C00B36D4E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A622821F71CC5C00B36D4E /* API.swift */; };
+		32B02D591F72F718003E3019 /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B02D581F72F718003E3019 /* Overview.swift */; };
 		32C0E2861F720CFF000D092F /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C0E2851F720CFF000D092F /* ModelViewController.swift */; };
 		32C0E2881F72113E000D092F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C0E2871F72113E000D092F /* Model.swift */; };
 		32C0E28A1F72129C000D092F /* Submodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C0E2891F72129C000D092F /* Submodel.swift */; };
@@ -48,6 +49,7 @@
 		3218F2A81F72071800707EA9 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		3218F2AA1F720CC300707EA9 /* MakeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeViewController.swift; sourceTree = "<group>"; };
 		32A622821F71CC5C00B36D4E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		32B02D581F72F718003E3019 /* Overview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overview.swift; sourceTree = "<group>"; };
 		32C0E2851F720CFF000D092F /* ModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelViewController.swift; sourceTree = "<group>"; };
 		32C0E2871F72113E000D092F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		32C0E2891F72129C000D092F /* Submodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Submodel.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				32C0E2871F72113E000D092F /* Model.swift */,
 				32C0E2891F72129C000D092F /* Submodel.swift */,
 				32CFB07A1F72E46A0043E6C7 /* Article.swift */,
+				32B02D581F72F718003E3019 /* Overview.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -364,12 +367,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-fair/Pods-fair-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,6 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32B02D591F72F718003E3019 /* Overview.swift in Sources */,
 				32CFB07B1F72E46A0043E6C7 /* Article.swift in Sources */,
 				32C0E2881F72113E000D092F /* Model.swift in Sources */,
 				32E1D1E81F71B87200FFEB0F /* FavoriteCarsViewConrtroller.swift in Sources */,

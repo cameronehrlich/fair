@@ -6,6 +6,7 @@ target 'fair' do
   pod 'Alamofire', '~> 4.5.1'
   pod 'PureLayout', '~> 3.0.2'
   pod 'SwiftyJSON', '~> 4.0.0-alpha.1'
+  pod 'SDWebImage', '~> 4.1.0'
 
   target 'fairTests' do
     inherit! :search_paths
