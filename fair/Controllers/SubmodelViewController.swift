@@ -18,13 +18,12 @@ class SubmodelViewController: UIViewController {
     
     public var model: Model? = nil {
         didSet {
-            if let model = model {
-                let years = Array(Set(model.submodels.map { $0.year })).sorted { $0 > $1 }
-                subModelsByYear = years.map { (year: Int) -> YearSubmodelsPair in
-                    return (year, model.submodels.filter { (submodel: Submodel) in
-                        return submodel.year == year
-                    })
-                }
+            guard let model = model else { return }
+            let years = Array(Set(model.submodels.map { $0.year })).sorted { $0 > $1 }
+            subModelsByYear = years.map { (year: Int) -> YearSubmodelsPair in
+                return (year, model.submodels.filter { (submodel: Submodel) in
+                    return submodel.year == year
+                })
             }
         }
     }

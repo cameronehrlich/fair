@@ -27,6 +27,12 @@
 		32E1D1F01F71B87200FFEB0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E1D1EE1F71B87200FFEB0F /* LaunchScreen.storyboard */; };
 		32E1D1FB1F71B87300FFEB0F /* fairTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1D1FA1F71B87300FFEB0F /* fairTests.swift */; };
 		32E7547D1F7306C9002D8BCF /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E7547C1F7306C9002D8BCF /* ImageCollectionViewCell.swift */; };
+		32E7547F1F732F84002D8BCF /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E7547E1F732F84002D8BCF /* ImageCell.swift */; };
+		32E754821F732FEA002D8BCF /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E754811F732FEA002D8BCF /* InfoCell.swift */; };
+		32E754841F732FF8002D8BCF /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E754831F732FF8002D8BCF /* ArticleCell.swift */; };
+		32E754861F733024002D8BCF /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E754851F733024002D8BCF /* MapCell.swift */; };
+		32E754881F733053002D8BCF /* OtherInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E754871F733053002D8BCF /* OtherInfoCell.swift */; };
+		32E7548A1F733F47002D8BCF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32E754891F733F47002D8BCF /* MapKit.framework */; };
 		634E08590767ACAD75C345E2 /* Pods_fair.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 911BE0BA7D0E823F02AE806C /* Pods_fair.framework */; };
 		FACD0D8EB39CC893F200BA4C /* Pods_fairTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D913E51D379B8A3381567E55 /* Pods_fairTests.framework */; };
 /* End PBXBuildFile section */
@@ -67,6 +73,12 @@
 		32E1D1FA1F71B87300FFEB0F /* fairTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fairTests.swift; sourceTree = "<group>"; };
 		32E1D1FC1F71B87300FFEB0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32E7547C1F7306C9002D8BCF /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		32E7547E1F732F84002D8BCF /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		32E754811F732FEA002D8BCF /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
+		32E754831F732FF8002D8BCF /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
+		32E754851F733024002D8BCF /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
+		32E754871F733053002D8BCF /* OtherInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherInfoCell.swift; sourceTree = "<group>"; };
+		32E754891F733F47002D8BCF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		911BE0BA7D0E823F02AE806C /* Pods_fair.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fair.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A362C29FE114CDC7FFC09713 /* Pods-fair.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fair.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fair/Pods-fair.debug.xcconfig"; sourceTree = "<group>"; };
 		D31DA8D33D0A69B2703B927D /* Pods-fair.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fair.release.xcconfig"; path = "Pods/Target Support Files/Pods-fair/Pods-fair.release.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32E7548A1F733F47002D8BCF /* MapKit.framework in Frameworks */,
 				634E08590767ACAD75C345E2 /* Pods_fair.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,7 +127,6 @@
 				32C0E2851F720CFF000D092F /* ModelViewController.swift */,
 				32CFB0771F722DAB0043E6C7 /* SubmodelViewController.swift */,
 				3218F2A81F72071800707EA9 /* DetailViewController.swift */,
-				32E7547C1F7306C9002D8BCF /* ImageCollectionViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -144,6 +156,7 @@
 			children = (
 				32E1D1E91F71B87200FFEB0F /* Main.storyboard */,
 				32E1D1E31F71B87200FFEB0F /* AppDelegate.swift */,
+				32E754801F732F8F002D8BCF /* Views */,
 				32CFB0791F722DBF0043E6C7 /* Controllers */,
 				3218F2A51F71D8FB00707EA9 /* Data */,
 				32E1D1EC1F71B87200FFEB0F /* Assets.xcassets */,
@@ -166,9 +179,23 @@
 			path = fairTests;
 			sourceTree = "<group>";
 		};
+		32E754801F732F8F002D8BCF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				32E7547C1F7306C9002D8BCF /* ImageCollectionViewCell.swift */,
+				32E7547E1F732F84002D8BCF /* ImageCell.swift */,
+				32E754811F732FEA002D8BCF /* InfoCell.swift */,
+				32E754831F732FF8002D8BCF /* ArticleCell.swift */,
+				32E754851F733024002D8BCF /* MapCell.swift */,
+				32E754871F733053002D8BCF /* OtherInfoCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		56EA359806DD7C8AE9786AC6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				32E754891F733F47002D8BCF /* MapKit.framework */,
 				911BE0BA7D0E823F02AE806C /* Pods_fair.framework */,
 				D913E51D379B8A3381567E55 /* Pods_fairTests.framework */,
 			);
@@ -243,6 +270,11 @@
 					32E1D1DF1F71B87200FFEB0F = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					32E1D1F51F71B87300FFEB0F = {
 						CreatedOnToolsVersion = 9.0;
@@ -413,12 +445,17 @@
 				32C0E2881F72113E000D092F /* Model.swift in Sources */,
 				32E1D1E41F71B87200FFEB0F /* AppDelegate.swift in Sources */,
 				32CFB0781F722DAB0043E6C7 /* SubmodelViewController.swift in Sources */,
+				32E754861F733024002D8BCF /* MapCell.swift in Sources */,
 				3218F2A41F71D8F500707EA9 /* Make.swift in Sources */,
 				3218F2AB1F720CC300707EA9 /* MakeViewController.swift in Sources */,
+				32E754841F732FF8002D8BCF /* ArticleCell.swift in Sources */,
 				32C0E2861F720CFF000D092F /* ModelViewController.swift in Sources */,
 				32A622831F71CC5C00B36D4E /* API.swift in Sources */,
 				32C0E28A1F72129C000D092F /* Submodel.swift in Sources */,
 				3218F2A91F72071800707EA9 /* DetailViewController.swift in Sources */,
+				32E7547F1F732F84002D8BCF /* ImageCell.swift in Sources */,
+				32E754881F733053002D8BCF /* OtherInfoCell.swift in Sources */,
+				32E754821F732FEA002D8BCF /* InfoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

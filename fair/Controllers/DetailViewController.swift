@@ -7,42 +7,86 @@
 //
 
 import UIKit
+import MapKit
 import SDWebImage
 
 typealias ImageUrlPair = (image1: URL, image2: URL)
 
+enum DetailSectionType: Int {
+    case title = 0
+    case images
+    case map
+    case articles
+    case otherInfo
+    case COUNT
+}
+
 class DetailViewController: UITableViewController {
 
+    let locationManager = CLLocationManager()
+    
     public var make: Make?
     public var model: Model?
     public var submodel: Submodel?
     
     private var articles: [Article]? {
         didSet {
-            
+            tableView.beginUpdates()
+            tableView.reloadSections(IndexSet(integer:DetailSectionType.articles.rawValue), with: .automatic)
+            tableView.endUpdates()
         }
     }
     
     private var imageUrls: ImageUrlPair? {
         didSet {
-            tableView.reloadData()
+            tableView.beginUpdates()
+            tableView.reloadSections(IndexSet(integer:DetailSectionType.images.rawValue), with: .automatic)
+            tableView.endUpdates()
         }
     }
     
     private var overview: Overview? {
         didSet {
-            if let overview = overview {
-                title = overview.title
+            tableView.beginUpdates()
+            tableView.reloadSections(IndexSet(integer:DetailSectionType.title.rawValue), with: .automatic)
+            tableView.reloadSections(IndexSet(integer:DetailSectionType.otherInfo.rawValue), with: .automatic)
+            tableView.endUpdates()
+        }
+    }
+    
+    private var locations: [CLLocation]? {
+        didSet {
+            if let cell = tableView.cellForRow(at: IndexPath(item: 0, section: DetailSectionType.map.rawValue)) as? MapCell {
+                cell.location = locations?.first
             }
         }
     }
-    private var images: [URL]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchArticles()
         fetchOverview()
         fetchImages()
+        
+        guard let _ = make, let model = model, let _ = submodel else { return }
+        
+        title = model.name
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            startLocation()
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    func startLocation() {
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
     }
     
     func fetchImages() {
@@ -81,42 +125,109 @@ class DetailViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-}
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return DetailSectionType.COUNT.rawValue
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch DetailSectionType(rawValue: section)! {
+        case .title:
+            return overview != nil ? 1 : 0
+        case .images:
+            return imageUrls != nil ? 1 : 0
+        case .map:
+            return 1
+        case .articles:
+            return 0
+        case .otherInfo:
+            return overview != nil ? 1 : 0
+        case .COUNT:
+            return 0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-extension DetailViewController: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //
+        switch DetailSectionType(rawValue: indexPath.section)! {
+        case .title:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell", for: indexPath) as! InfoCell
+            if let submodel = submodel {
+                cell.textLabel?.text = submodel.name
+                cell.detailTextLabel?.text = "\(submodel.year)"
+            }
+            cell.contentView.backgroundColor = .blue
+            return cell
+        case .images:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageCell
+            cell.collectionView.backgroundColor = .lightGray
+            cell.imagePair = imageUrls
+            return cell
+        case .map:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MapCell", for: indexPath) as! MapCell
+            cell.mapView.showsUserLocation = true
+            cell.make = make
+            return cell
+        case .articles:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
+            cell.contentView.backgroundColor = .purple
+            return cell
+        case .otherInfo:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OtherInfoCell", for: indexPath) as! OtherInfoCell
+            cell.contentView.backgroundColor = .orange
+            return cell
+        case .COUNT:
+            print("Error in \(#function)")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell", for: indexPath)
+            return cell
+        }
     }
-}
-
-extension DetailViewController: UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch DetailSectionType(rawValue: indexPath.section)! {
+        case .title:
+            break
+        case .images:
+            break
+        case .map:
+            break
+        case .articles:
+            break
+        case .otherInfo:
+            break
+        case .COUNT:
+            break
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCellReuseIdentifier", for: indexPath) as! ImageCollectionViewCell
-        switch indexPath.row {
-        case 0:
-            cell.imageView.sd_setImage(with: imageUrls?.image1 , completed: nil)
-        case 1:
-            cell.imageView.sd_setImage(with: imageUrls?.image2 , completed: nil)
-        default: break
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        enum Height: CGFloat {
+            case large = 200
+            case small = 50
         }
         
-        
-        return cell
+        switch DetailSectionType(rawValue: indexPath.section)! {
+        case .title:        return Height.small.rawValue
+        case .images:       return Height.large.rawValue
+        case .map:          return Height.large.rawValue
+        case .articles:     return Height.large.rawValue
+        case .otherInfo:    return Height.small.rawValue
+        case .COUNT:
+            print("Error in \(#function)")
+            return 0
+        }
     }
 }
 
-extension DetailViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width, height: 100)
+extension DetailViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        startLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.locations = locations
+        locationManager.stopUpdatingLocation()
     }
 }
