@@ -9,7 +9,5 @@
 import UIKit
 
 class InfoCell: UITableViewCell {
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+    
 }

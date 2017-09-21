@@ -39,15 +39,12 @@ extension Model {
             let styles = yearDict[JSONFields.styles.rawValue].arrayValue
             let year = yearDict["year"].intValue
             for styleDict in styles {
-                
                 let subName = styleDict["name"].stringValue
                 let subTrim = styleDict["trim"].stringValue
-                
                 let submodel = styleDict["submodel"].dictionaryValue
                 let subBody = submodel["body"]?.stringValue ?? ""
                 let subNiceName = submodel["niceName"]?.stringValue ?? ""
                 let subModelName = submodel["modelName"]?.stringValue ?? ""
-                
                 let newSubmodel = Submodel(name: subName, niceName: subNiceName, year: year, trim: subTrim, body: subBody, modelName: subModelName)
                 tmpSubmodels.append(newSubmodel)
             }

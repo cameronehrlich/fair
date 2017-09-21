@@ -22,12 +22,7 @@ class MoreInfoViewController: UIViewController {
             } catch {
                 print(error)
             }
-            
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 }
 

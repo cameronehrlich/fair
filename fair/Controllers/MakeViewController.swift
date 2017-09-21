@@ -43,10 +43,6 @@ class MakeViewController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     func searchMakes(make: String?) {
         if let make = make {
             searchResults = makes.filter { $0.niceName.contains(make.lowercased()) }.sorted { $0.niceName < $1.niceName }
@@ -99,14 +95,7 @@ extension MakeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MakeCell", for: indexPath)
-
-        var car: Make?
-        if searchResults.count > 0 {
-            car = searchResults[indexPath.row]
-        } else {
-            car = makes[indexPath.row]
-        }
-        
+        let car: Make? = (searchResults.count > 0) ? searchResults[indexPath.row] : makes[indexPath.row]
         if let car = car {
             cell.textLabel?.text = car.niceName.capitalized
         }

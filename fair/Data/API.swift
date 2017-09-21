@@ -15,8 +15,8 @@ typealias RequestErrorCompletion = (RequestError) -> Void
 
 enum BaseURLType: String {
     case vehicle    = "https://api.edmunds.com/api/vehicle/v2/"
-    case media      = "https://api.edmunds.com/api/media/v2/"
-    case editorial  = "https://api.edmunds.com/api/editorial/v2/" // honda/civic/2013
+    case media      = "https://api.edmunds.com/api/media/v2/" // TODO : Endpoint not working?
+    case editorial  = "https://api.edmunds.com/api/editorial/v2/"
 }
 
 struct API {
@@ -71,11 +71,10 @@ struct API {
 }
 
 enum Endpoint {
-    
     case fetchMakes()
     case fetchMake(make: String)
     case fetchModel(model: String, make: String)
-    case fetchImages(make: String, model: String, year: String?)
+    case fetchImages(make: String, model: String, year: String?) // TODO : Edmunds media API not working?
     case fetchOverview(make: String, model: String, year: String?)
     case fetchArticles(tag: String)
 }

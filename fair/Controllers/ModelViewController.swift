@@ -49,11 +49,7 @@ class ModelViewController: UIViewController {
             }
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
+
     func searchMakes(make: String?) {
         if let make = make {
             searchResults = models.filter { $0.niceName.contains(make.lowercased()) }

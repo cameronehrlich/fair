@@ -10,13 +10,4 @@ import UIKit
 
 class OtherInfoCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    var otherInfoPair: OtherInfoPair? {
-        didSet {
-            
-        }
-    }
 }

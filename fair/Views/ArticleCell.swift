@@ -9,7 +9,5 @@
 import UIKit
 
 class ArticleCell: UITableViewCell {
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+    
 }

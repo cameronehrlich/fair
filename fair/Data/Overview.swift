@@ -12,7 +12,6 @@ import SwiftyJSON
 typealias OtherInfoPair = (label: String, fulltext: String)
 
 struct Overview {
-    
     let title: String
     let introduction: String
     let edmundsSays: String

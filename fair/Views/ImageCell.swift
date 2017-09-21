@@ -37,10 +37,8 @@ extension ImageCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCellReuseIdentifier", for: indexPath) as! ImageCollectionViewCell
         switch indexPath.row {
-        case 0:
-            cell.imageView.sd_setImage(with: imagePair?.image1 , completed: nil)
-        case 1:
-            cell.imageView.sd_setImage(with: imagePair?.image2 , completed: nil)
+        case 0: cell.imageView.sd_setImage(with: imagePair?.image1 , completed: nil)
+        case 1: cell.imageView.sd_setImage(with: imagePair?.image2 , completed: nil)
         default:
             break
         }
@@ -49,9 +47,8 @@ extension ImageCell: UICollectionViewDataSource {
 }
 
 extension DetailViewController: UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //
+        // do nothing
     }
 }
 
