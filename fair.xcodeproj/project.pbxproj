@@ -33,6 +33,7 @@
 		32E754861F733024002D8BCF /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E754851F733024002D8BCF /* MapCell.swift */; };
 		32E754881F733053002D8BCF /* OtherInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E754871F733053002D8BCF /* OtherInfoCell.swift */; };
 		32E7548A1F733F47002D8BCF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32E754891F733F47002D8BCF /* MapKit.framework */; };
+		32E7548C1F736009002D8BCF /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E7548B1F736009002D8BCF /* MoreInfoViewController.swift */; };
 		634E08590767ACAD75C345E2 /* Pods_fair.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 911BE0BA7D0E823F02AE806C /* Pods_fair.framework */; };
 		FACD0D8EB39CC893F200BA4C /* Pods_fairTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D913E51D379B8A3381567E55 /* Pods_fairTests.framework */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,7 @@
 		32E754851F733024002D8BCF /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
 		32E754871F733053002D8BCF /* OtherInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherInfoCell.swift; sourceTree = "<group>"; };
 		32E754891F733F47002D8BCF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		32E7548B1F736009002D8BCF /* MoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
 		911BE0BA7D0E823F02AE806C /* Pods_fair.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fair.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A362C29FE114CDC7FFC09713 /* Pods-fair.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fair.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fair/Pods-fair.debug.xcconfig"; sourceTree = "<group>"; };
 		D31DA8D33D0A69B2703B927D /* Pods-fair.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fair.release.xcconfig"; path = "Pods/Target Support Files/Pods-fair/Pods-fair.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				32C0E2851F720CFF000D092F /* ModelViewController.swift */,
 				32CFB0771F722DAB0043E6C7 /* SubmodelViewController.swift */,
 				3218F2A81F72071800707EA9 /* DetailViewController.swift */,
+				32E7548B1F736009002D8BCF /* MoreInfoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				32C0E28A1F72129C000D092F /* Submodel.swift in Sources */,
 				3218F2A91F72071800707EA9 /* DetailViewController.swift in Sources */,
 				32E7547F1F732F84002D8BCF /* ImageCell.swift in Sources */,
+				32E7548C1F736009002D8BCF /* MoreInfoViewController.swift in Sources */,
 				32E754881F733053002D8BCF /* OtherInfoCell.swift in Sources */,
 				32E754821F732FEA002D8BCF /* InfoCell.swift in Sources */,
 			);

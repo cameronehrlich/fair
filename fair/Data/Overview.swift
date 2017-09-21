@@ -9,7 +9,10 @@
 import Foundation
 import SwiftyJSON
 
+typealias OtherInfoPair = (label: String, fulltext: String)
+
 struct Overview {
+    
     let title: String
     let introduction: String
     let edmundsSays: String
@@ -19,6 +22,19 @@ struct Overview {
     let whatsNew : String
     let interior: String
     let powertrain: String
+    
+    var otherInfoArray: [OtherInfoPair] {
+        var tmpInfoArray: [OtherInfoPair] = []
+        tmpInfoArray.append( OtherInfoPair(label: "Introduction", fulltext: introduction) )
+        tmpInfoArray.append( OtherInfoPair(label: "Edmunds Says", fulltext: edmundsSays) )
+        tmpInfoArray.append( OtherInfoPair(label: "Safety", fulltext: safety) )
+        tmpInfoArray.append( OtherInfoPair(label: "Driving", fulltext: driving) )
+        tmpInfoArray.append( OtherInfoPair(label: "Body", fulltext: body) )
+        tmpInfoArray.append( OtherInfoPair(label: "What's New", fulltext: whatsNew) )
+        tmpInfoArray.append( OtherInfoPair(label: "Interior", fulltext: introduction) )
+        tmpInfoArray.append( OtherInfoPair(label: "Powertrain", fulltext: powertrain) )
+        return tmpInfoArray
+    }
 }
 
 extension Overview {

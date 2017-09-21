@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import SDWebImage
+import SafariServices
 
 typealias ImageUrlPair = (image1: URL, image2: URL)
 
@@ -47,12 +48,17 @@ class DetailViewController: UITableViewController {
     
     private var overview: Overview? {
         didSet {
+            if let overview = overview {
+                otherInfo = overview.otherInfoArray
+            }
             tableView.beginUpdates()
             tableView.reloadSections(IndexSet(integer:DetailSectionType.title.rawValue), with: .automatic)
             tableView.reloadSections(IndexSet(integer:DetailSectionType.otherInfo.rawValue), with: .automatic)
             tableView.endUpdates()
         }
     }
+    
+    private var otherInfo: [OtherInfoPair]? = []
     
     private var locations: [CLLocation]? {
         didSet {
@@ -67,9 +73,7 @@ class DetailViewController: UITableViewController {
         fetchArticles()
         fetchOverview()
         fetchImages()
-        
         guard let _ = make, let model = model, let _ = submodel else { return }
-        
         title = model.name
     }
     
@@ -79,6 +83,15 @@ class DetailViewController: UITableViewController {
             startLocation()
         } else {
             locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detail-moreinfo" {
+            let destination = segue.destination as! MoreInfoViewController
+            if let otherInfoPair = otherInfo, let selectedIndexPath = tableView.indexPathForSelectedRow {
+                destination.otherInfoPair = otherInfoPair[selectedIndexPath.row]
+            }
         }
     }
     
@@ -139,9 +152,9 @@ class DetailViewController: UITableViewController {
         case .map:
             return 1
         case .articles:
-            return 0
+            return articles != nil ? articles!.count : 0
         case .otherInfo:
-            return overview != nil ? 1 : 0
+            return overview != nil ? overview!.otherInfoArray.count : 0
         case .COUNT:
             return 0
         }
@@ -153,10 +166,9 @@ class DetailViewController: UITableViewController {
         case .title:
             let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell", for: indexPath) as! InfoCell
             if let submodel = submodel {
-                cell.textLabel?.text = submodel.name
-                cell.detailTextLabel?.text = "\(submodel.year)"
+                cell.textLabel?.text = "\(submodel.year) - \(submodel.modelName)"
+                cell.detailTextLabel?.text = submodel.name
             }
-            cell.contentView.backgroundColor = .blue
             return cell
         case .images:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as! ImageCell
@@ -165,21 +177,35 @@ class DetailViewController: UITableViewController {
             return cell
         case .map:
             let cell = tableView.dequeueReusableCell(withIdentifier: "MapCell", for: indexPath) as! MapCell
-            cell.mapView.showsUserLocation = true
             cell.make = make
             return cell
         case .articles:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
-            cell.contentView.backgroundColor = .purple
+            if let articles = articles {
+                cell.textLabel?.text = articles[indexPath.row].title
+                cell.detailTextLabel?.text = articles[indexPath.row].description
+            }
             return cell
         case .otherInfo:
             let cell = tableView.dequeueReusableCell(withIdentifier: "OtherInfoCell", for: indexPath) as! OtherInfoCell
-            cell.contentView.backgroundColor = .orange
+            if let otherInfo = otherInfo {
+                cell.textLabel?.text = otherInfo[indexPath.row].label.capitalized
+            }
             return cell
         case .COUNT:
             print("Error in \(#function)")
             let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell", for: indexPath)
             return cell
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch DetailSectionType(rawValue:section)! {
+        case .title,  .COUNT:  return nil
+        case .images:       return "Swipe for more"
+        case .map:           return "Tap for directions"
+        case .articles:     return "Articles"
+        case .otherInfo:    return "More Info"
         }
     }
     
@@ -192,8 +218,16 @@ class DetailViewController: UITableViewController {
         case .map:
             break
         case .articles:
+            if let articles = articles {
+                let article = articles[indexPath.row]
+                if let url = article.link {
+                    open(url: url)
+                }
+            }
             break
         case .otherInfo:
+            performSegue(withIdentifier: "detail-moreinfo", sender: self)
+            tableView.deselectRow(at: indexPath, animated: true)
             break
         case .COUNT:
             break
@@ -211,7 +245,7 @@ class DetailViewController: UITableViewController {
         case .title:        return Height.small.rawValue
         case .images:       return Height.large.rawValue
         case .map:          return Height.large.rawValue
-        case .articles:     return Height.large.rawValue
+        case .articles:     return Height.small.rawValue
         case .otherInfo:    return Height.small.rawValue
         case .COUNT:
             print("Error in \(#function)")
@@ -229,5 +263,18 @@ extension DetailViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.locations = locations
         locationManager.stopUpdatingLocation()
+    }
+}
+
+extension DetailViewController: SFSafariViewControllerDelegate {
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func open(url: URL) {
+        let safariViewController = SFSafariViewController(url: url)
+        safariViewController.delegate = self
+        present(safariViewController, animated: true, completion: nil)
     }
 }

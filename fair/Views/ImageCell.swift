@@ -20,6 +20,7 @@ class ImageCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        collectionView.backgroundColor = .lightGray
     }
 }
 

@@ -19,6 +19,7 @@ class SubmodelViewController: UIViewController {
     public var model: Model? = nil {
         didSet {
             guard let model = model else { return }
+            title = "\(model.name) Submodels"
             let years = Array(Set(model.submodels.map { $0.year })).sorted { $0 > $1 }
             subModelsByYear = years.map { (year: Int) -> YearSubmodelsPair in
                 return (year, model.submodels.filter { (submodel: Submodel) in
@@ -33,15 +34,7 @@ class SubmodelViewController: UIViewController {
             subModelsByYear.sort { $0.year > $1.year }
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "submodel-detail" {
             let destination = segue.destination as! DetailViewController

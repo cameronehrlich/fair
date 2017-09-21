@@ -31,6 +31,13 @@ class MapCell: UITableViewCell {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        mapView.delegate = self
+        mapView.showsUserLocation = true
+        mapView.isScrollEnabled = false
+    }
+    
     private func searchWith(query: String, location: CLLocation) {
         search(query: query, spanmeters: 500, location: location) { (response, error) in
             guard let response = response else { return }
@@ -46,12 +53,6 @@ class MapCell: UITableViewCell {
         searchRequest.naturalLanguageQuery = query
         let localSearch = MKLocalSearch(request: searchRequest)
         localSearch.start(completionHandler: completionHandler)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        mapView.delegate = self
-        mapView.showsUserLocation = true
     }
 }
 
