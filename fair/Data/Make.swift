@@ -28,3 +28,10 @@ extension Make {
         niceName = json[JSONFields.niceName.rawValue].stringValue
     }
 }
+
+extension Make {
+    static func list(from json: JSON) -> [Make] {
+        guard let makes = json.dictionaryValue["makes"] else { return [] }
+        return makes.arrayValue.map { Make(json: $0) }.sorted{ $0.niceName < $1.niceName }.sorted {$0.niceName < $1.niceName }
+    }
+}

@@ -9,19 +9,28 @@
 import UIKit
 
 class MoreInfoViewController: UIViewController {
-
-    @IBOutlet weak var textView: UITextView!
     
-    var otherInfoPair: OtherInfoPair?
+    @IBOutlet weak var textView: UITextView!
+    public var otherInfoPair: OtherInfoPair?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let otherInfoPair = otherInfoPair {
-            do {
-                textView.attributedText = try NSAttributedString(data: otherInfoPair.fulltext.data(using: String.Encoding.unicode, allowLossyConversion: true)!, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
-            } catch {
-                print(error)
-            }
+        guard let otherInfoPair = otherInfoPair else { return }
+        textView.attributedText = attributedString(fromHtml: otherInfoPair.fulltext)
+    }
+}
+
+// MARK: Helpers
+extension MoreInfoViewController {
+    
+    func attributedString(fromHtml html: String) -> NSAttributedString? {
+        do {
+            let data = html.data(using: String.Encoding.unicode, allowLossyConversion: true)!
+            let options: [NSAttributedString.DocumentReadingOptionKey : Any] = [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue]
+            return try NSAttributedString(data: data, options: options, documentAttributes: nil)
+        } catch {
+            print(error)
+            return nil
         }
     }
 }

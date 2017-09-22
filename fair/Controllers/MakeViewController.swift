@@ -27,36 +27,34 @@ class MakeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        tableView.keyboardDismissMode = .interactive
         title = "Select Make"
+        tableView.keyboardDismissMode = .interactive
         fetchMakes()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "make-model" {
             let nextScene = segue.destination as! ModelViewController
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                let make: Make? = (searchResults.count > 0) ? searchResults[indexPath.row] : makes[indexPath.row]
-                nextScene.make = make
-            }
+            guard let indexPath = self.tableView.indexPathForSelectedRow else { return }
+            let make: Make? = (searchResults.count > 0) ? searchResults[indexPath.row] : makes[indexPath.row]
+            nextScene.make = make
         }
     }
+}
+
+// MARK : Helpers
+extension MakeViewController {
     
-    func searchMakes(make: String?) {
+    private func searchMakes(make: String?) {
         if let make = make {
             searchResults = makes.filter { $0.niceName.contains(make.lowercased()) }.sorted { $0.niceName < $1.niceName }
         }
     }
     
-    func fetchMakes() {
+    private func fetchMakes() {
         API.request(.fetchMakes(), completion: { json in
-            if let makes = json.dictionaryValue["makes"] {
-                let tmpMakes = makes.arrayValue.map { jsonCar -> Make in
-                    return Make(json: jsonCar)
-                }
-                self.makes = tmpMakes.sorted{ $0.niceName < $1.niceName }
-            }
+            
+            self.makes = Make.list(from: json)
         }) { error in
             print(error)
         }
@@ -79,15 +77,10 @@ extension MakeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if searchResults.count > 0 {
+        if searchResults.count == 0, let searchText = searchBar.text {
+            if !searchText.isEmpty { return 0 }
+        } else if searchResults.count > 0 {
             return searchResults.count
-        } else if searchResults.count == 0 {
-            if let searchText = searchBar.text {
-                if !searchText.isEmpty {
-                    return 0
-                }
-            }
         }
         return makes.count
     }

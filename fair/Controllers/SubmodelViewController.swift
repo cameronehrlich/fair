@@ -8,42 +8,29 @@
 
 import UIKit
 
-typealias YearSubmodelsPair = (year: Int, submodels: [Submodel])
-
 class SubmodelViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
     public var make: Make?
-    
+    public var subModelsByYear: [YearSubmodels] = []
+
     public var model: Model? = nil {
         didSet {
             guard let model = model else { return }
             title = "\(model.name) Submodels"
-            let years = Array(Set(model.submodels.map { $0.year })).sorted { $0 > $1 }
-            subModelsByYear = years.map { (year: Int) -> YearSubmodelsPair in
-                return (year, model.submodels.filter { (submodel: Submodel) in
-                    return submodel.year == year
-                })
-            }
+            subModelsByYear = Submodel.submodelsByYear(fromModel: model)
         }
     }
     
-    private var subModelsByYear: [YearSubmodelsPair] = [] {
-        didSet {
-            subModelsByYear.sort { $0.year > $1.year }
-        }
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "submodel-detail" {
             let destination = segue.destination as! DetailViewController
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let submodel = subModelsByYear[indexPath.section].submodels[indexPath.row]
-                destination.submodel = submodel
-                destination.make = make
-                destination.model = model
-            }
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let submodel = subModelsByYear[indexPath.section].submodels[indexPath.row]
+            destination.submodel = submodel
+            destination.make = make
+            destination.model = model
         }
     }
 }

@@ -9,6 +9,8 @@
 import Foundation
 import SwiftyJSON
 
+typealias YearSubmodels = (year: Int, submodels: [Submodel])
+
 struct Submodel {
     let name: String
     let niceName: String
@@ -45,6 +47,18 @@ extension Submodel {
     }
 }
 
+extension Submodel {
+    static func submodelsByYear(fromModel model: Model) -> [YearSubmodels] {
+        let uniqeSubmodels = Set(model.submodels.map { $0.year })
+        let yearsSubmodels = Array(uniqeSubmodels).sorted { $0 > $1 }.map { year -> YearSubmodels in
+            return (year, model.submodels.filter { submodel in
+                return submodel.year == year
+            })
+        }
+        return yearsSubmodels.sorted { $0.year > $1.year }
+    }
+}
+
 extension Submodel: Hashable {
     var hashValue: Int {
         return name.hashValue
@@ -64,3 +78,4 @@ extension Submodel: Hashable {
             && lhs.modelName == rhs.modelName
     }
 }
+

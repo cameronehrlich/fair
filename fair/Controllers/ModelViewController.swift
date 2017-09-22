@@ -17,53 +17,46 @@ class ModelViewController: UIViewController {
     
     var models: [Model] = [] {
         didSet {
-            models.sort {$0.niceName < $1.niceName }
             tableView.reloadData()
         }
     }
     
     var searchResults: [Model] = [] {
         didSet {
-            models.sort { $0.niceName < $1.niceName }
             tableView.reloadData()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         tableView.keyboardDismissMode = .interactive
-        if let make = make {
-            title = "\(make.name) Models"
-            fetchMake(make: make.niceName)
-        }
+        guard let make = make else { return }
+        title = "\(make.name) Models"
+        fetchMake(make: make.niceName)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "model-submodel" {
             let nextScene = segue.destination as! SubmodelViewController
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                let model: Model? = (searchResults.count > 0) ? searchResults[indexPath.row] : models[indexPath.row]
-                nextScene.make = make
-                nextScene.model = model
-            }
+            guard let indexPath = self.tableView.indexPathForSelectedRow else { return }
+            let model: Model? = (searchResults.count > 0) ? searchResults[indexPath.row] : models[indexPath.row]
+            nextScene.make = make
+            nextScene.model = model
         }
     }
+}
 
-    func searchMakes(make: String?) {
-        if let make = make {
-            searchResults = models.filter { $0.niceName.contains(make.lowercased()) }
-        }
+// Mark Helpers
+extension ModelViewController {
+    
+    private func searchMakes(make: String?) {
+        guard let make = make else {return }
+        searchResults = models.filter { $0.niceName.contains(make.lowercased()) }
     }
     
-    func fetchMake(make: String) {
+    private func fetchMake(make: String) {
         API.request(.fetchMake(make: make), completion: { json in
-            if let models = json.dictionaryValue["models"] {
-                let tmpModels = models.arrayValue.map { jsonCar -> Model in
-                    return Model(json: jsonCar)
-                }
-                self.models = tmpModels
-            }
+            self.models = Model.list(from: json)
         }) { error in
             print(error)
         }
@@ -71,7 +64,7 @@ class ModelViewController: UIViewController {
 }
 
 extension ModelViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "model-submodel", sender: self)
         searchBar.resignFirstResponder()
@@ -86,21 +79,15 @@ extension ModelViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if searchResults.count > 0 {
+        if searchResults.count == 0, let searchText = searchBar.text {
+            if !searchText.isEmpty { return 0 }
+        } else if searchResults.count > 0 {
             return searchResults.count
-        } else if searchResults.count == 0 {
-            if let searchText = searchBar.text {
-                if !searchText.isEmpty {
-                    return 0
-                }
-            }
         }
         return models.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ModelCell", for: indexPath)
         let car: Model? = (searchResults.count > 0) ? searchResults[indexPath.row] : models[indexPath.row]
         if let car = car {

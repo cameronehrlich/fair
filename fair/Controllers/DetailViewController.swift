@@ -30,6 +30,8 @@ class DetailViewController: UITableViewController {
     public var model: Model?
     public var submodel: Submodel?
     
+    private var otherInfo: [OtherInfoPair]? = []
+
     private var articles: [Article]? {
         didSet {
             tableView.beginUpdates()
@@ -48,9 +50,6 @@ class DetailViewController: UITableViewController {
     
     private var overview: Overview? {
         didSet {
-            if let overview = overview {
-                otherInfo = overview.otherInfoArray
-            }
             tableView.beginUpdates()
             tableView.reloadSections(IndexSet(integer:DetailSectionType.title.rawValue), with: .automatic)
             tableView.reloadSections(IndexSet(integer:DetailSectionType.otherInfo.rawValue), with: .automatic)
@@ -58,13 +57,17 @@ class DetailViewController: UITableViewController {
         }
     }
     
-    private var otherInfo: [OtherInfoPair]? = []
-    
     private var locations: [CLLocation]? {
         didSet {
-            if let cell = tableView.cellForRow(at: IndexPath(item: 0, section: DetailSectionType.map.rawValue)) as? MapCell {
-                cell.location = locations?.first
-            }
+            let indexPath = IndexPath(item: 0, section: DetailSectionType.map.rawValue)
+            guard
+                let cell = tableView.cellForRow(at: indexPath) as? MapCell,
+                let locations = locations,
+                let location = locations.first
+                else { return }
+            
+            cell.location = location
+            locationManager.stopUpdatingLocation()
         }
     }
     
@@ -73,8 +76,7 @@ class DetailViewController: UITableViewController {
         fetchArticles()
         fetchOverview()
         fetchImages()
-        guard let _ = make, let model = model, let _ = submodel else { return }
-        title = model.name
+        title = model?.name
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -89,55 +91,15 @@ class DetailViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail-moreinfo" {
             let destination = segue.destination as! MoreInfoViewController
-            if let otherInfoPair = otherInfo, let selectedIndexPath = tableView.indexPathForSelectedRow {
-                destination.otherInfoPair = otherInfoPair[selectedIndexPath.row]
-            }
+            guard let overview = overview, let indexPath = tableView.indexPathForSelectedRow else { return }
+            let otherInfoPair = overview.otherInfoArray[indexPath.row]
+            destination.otherInfoPair = otherInfoPair
         }
     }
-    
-    func startLocation() {
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.delegate = self
-        locationManager.startUpdatingLocation()
-    }
-    
-    func fetchImages() {
-        guard let make = make, let model = model, let submodel = submodel else { return }
-        func constructUrls(year: String, make: String, model: String) -> ImageUrlPair {
-            let image1 = URL(string: "https://a.tcimg.net/v/model_images/v1/\(year)/\(make)/\(model)/all/360x185/side")!
-            let image2 = URL(string: "https://a.tcimg.net/v/model_images/v1/\(year)/\(make)/\(model)/all/360x185/f3q")!
-            return (image1, image2)
-        }
-        imageUrls = constructUrls(year: "\(submodel.year)", make: make.niceName, model: model.niceName)
-    }
-    
-    func fetchOverview() {
-        guard let make = make, let model = model, let submodel = submodel else { return }
-        API.request(.fetchOverview(make: make.niceName, model: model.niceName, year: "\(submodel.year)"), completion: { json in
-            self.overview = Overview(json: json)
-        }, failure: { error in
-            print(error)
-        })
-    }
-    
-    func fetchArticles() {
-        guard let make = make else { return }
-        API.request(.fetchArticles(tag: make.niceName), completion: { json in
-            if let articles = json.dictionaryValue["articles"] {
-                let tmpArticles = articles.arrayValue.map { jsonArticle -> Article in
-                    return Article(json: jsonArticle)
-                }
-                self.articles = tmpArticles
-            }
-        }) { error in
-            print(error)
-        }
-    }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+// MARK : UITableViewController implicit Datasource and Delegate
+extension DetailViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return DetailSectionType.COUNT.rawValue
@@ -145,23 +107,17 @@ class DetailViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch DetailSectionType(rawValue: section)! {
-        case .title:
-            return overview != nil ? 1 : 0
-        case .images:
-            return imageUrls != nil ? 1 : 0
-        case .map:
-            return 1
-        case .articles:
-            return articles != nil ? articles!.count : 0
-        case .otherInfo:
-            return overview != nil ? overview!.otherInfoArray.count : 0
-        case .COUNT:
-            return 0
+        case .title:        return overview != nil ? 1 : 0
+        case .images:       return imageUrls != nil ? 1 : 0
+        case .map:          return 1
+        case .articles:     return articles != nil ? articles!.count : 0
+        case .otherInfo:    return overview != nil ? overview!.otherInfoArray.count : 0
+        case .COUNT:        return 0
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         switch DetailSectionType(rawValue: indexPath.section)! {
         case .title:
             let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell", for: indexPath) as! InfoCell
@@ -188,9 +144,11 @@ class DetailViewController: UITableViewController {
             return cell
         case .otherInfo:
             let cell = tableView.dequeueReusableCell(withIdentifier: "OtherInfoCell", for: indexPath) as! OtherInfoCell
-            if let otherInfo = otherInfo {
-                cell.textLabel?.text = otherInfo[indexPath.row].label.capitalized
+            if let overview = overview {
+                let otherInfo = overview.otherInfoArray[indexPath.row] as OtherInfoPair
+                cell.textLabel?.text = otherInfo.label.capitalized
             }
+            
             return cell
         case .COUNT:
             print("Error in \(#function)")
@@ -211,11 +169,7 @@ class DetailViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch DetailSectionType(rawValue: indexPath.section)! {
-        case .title:
-            break
-        case .images:
-            break
-        case .map:
+        case .title, .images, .map, .COUNT:
             break
         case .articles:
             if let articles = articles {
@@ -229,28 +183,58 @@ class DetailViewController: UITableViewController {
             performSegue(withIdentifier: "detail-moreinfo", sender: self)
             tableView.deselectRow(at: indexPath, animated: true)
             break
-        case .COUNT:
-            break
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         enum Height: CGFloat {
             case large = 200
             case small = 50
         }
-        
         switch DetailSectionType(rawValue: indexPath.section)! {
-        case .title:        return Height.small.rawValue
-        case .images:       return Height.large.rawValue
-        case .map:          return Height.large.rawValue
-        case .articles:     return Height.small.rawValue
-        case .otherInfo:    return Height.small.rawValue
-        case .COUNT:
-            print("Error in \(#function)")
-            return 0
+        case .title, .articles, .otherInfo: return Height.small.rawValue
+        case .images, .map:                 return Height.large.rawValue
+        case .COUNT:                        return 0
         }
+    }
+}
+
+// MARK: Helpers
+extension DetailViewController {
+    
+    func fetchImages() {
+        guard let make = make, let model = model, let submodel = submodel else { return }
+        func constructUrls(year: String, make: String, model: String) -> ImageUrlPair {
+            let image1 = URL(string: "https://a.tcimg.net/v/model_images/v1/\(year)/\(make)/\(model)/all/360x185/side")!
+            let image2 = URL(string: "https://a.tcimg.net/v/model_images/v1/\(year)/\(make)/\(model)/all/360x185/f3q")!
+            return (image1, image2)
+        }
+        imageUrls = constructUrls(year: "\(submodel.year)", make: make.niceName, model: model.niceName)
+    }
+    
+    func fetchOverview() {
+        guard let make = make, let model = model, let submodel = submodel else { return }
+        API.request(.fetchOverview(make: make.niceName, model: model.niceName, year: "\(submodel.year)"), completion: { json in
+            self.overview = Overview(json: json)
+        }, failure: { error in
+            print(error)
+        })
+    }
+    
+    func fetchArticles() {
+        guard let make = make else { return }
+        API.request(.fetchArticles(tag: make.niceName), completion: { json in
+            self.articles = Article.list(from: json)
+        }) { error in
+            print(error)
+        }
+    }
+    
+    func startLocation() {
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
     }
 }
 
@@ -262,7 +246,6 @@ extension DetailViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.locations = locations
-        locationManager.stopUpdatingLocation()
     }
 }
 

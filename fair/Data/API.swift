@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-typealias DefaultRequestCompletion = (JSON) -> Void
-typealias RequestErrorCompletion = (RequestError) -> Void
+typealias SuccessCompletion = (JSON) -> Void
+typealias ErrorCompletion   = (RequestError) -> Void
 
 enum BaseURLType: String {
     case vehicle    = "https://api.edmunds.com/api/vehicle/v2/"
@@ -24,7 +24,7 @@ struct API {
     static let Key = "ke2d4cv925rhhzgmkvmt755u"
     
     @discardableResult
-    static func request(_ endpoint: Endpoint, completion: @escaping DefaultRequestCompletion, failure: @escaping RequestErrorCompletion) -> DataRequest {
+    static func request(_ endpoint: Endpoint, completion: @escaping SuccessCompletion, failure: @escaping ErrorCompletion) -> DataRequest {
         let url: String = endpoint.rawValue.endpointType.rawValue + endpoint.rawValue.path
         let method = endpoint.rawValue.method
         let params = endpoint.rawValue.params
@@ -52,7 +52,6 @@ struct API {
     }
     
     private static func validatedJSON(forResponse response: DefaultDataResponse) throws -> JSON {
-        
         guard response.response?.statusCode != 401 else {
             throw RequestError.unauthorized
         }
@@ -108,7 +107,6 @@ enum RequestError: Error {
 }
 
 struct CallInfo {
-    
     let method: HTTPMethod
     let path: String
     let params: [String : Any]?

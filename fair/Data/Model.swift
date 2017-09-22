@@ -12,7 +12,6 @@ import SwiftyJSON
 struct Model {
     let name: String
     let niceName: String
-    let trim: String
     let submodels: [Submodel]
 }
 
@@ -21,7 +20,6 @@ extension Model {
         case
         name = "name",
         niceName = "niceName",
-        trim = "trim",
         years = "years",
         styles = "styles"
     }
@@ -31,24 +29,31 @@ extension Model {
     init(json: JSON) {
         name = json[JSONFields.name.rawValue].stringValue
         niceName = json[JSONFields.niceName.rawValue].stringValue
-        trim = json[JSONFields.trim.rawValue].stringValue
         let years = json[JSONFields.years.rawValue].arrayValue
         
         var tmpSubmodels: [Submodel] = []
-        for yearDict in years {
-            let styles = yearDict[JSONFields.styles.rawValue].arrayValue
-            let year = yearDict["year"].intValue
-            for styleDict in styles {
-                let subName = styleDict["name"].stringValue
-                let subTrim = styleDict["trim"].stringValue
+        let _ = years.map { yearDict in
+            let _ = yearDict[JSONFields.styles.rawValue].arrayValue.map { styleDict in
+                let year = yearDict["year"].intValue
                 let submodel = styleDict["submodel"].dictionaryValue
-                let subBody = submodel["body"]?.stringValue ?? ""
-                let subNiceName = submodel["niceName"]?.stringValue ?? ""
-                let subModelName = submodel["modelName"]?.stringValue ?? ""
-                let newSubmodel = Submodel(name: subName, niceName: subNiceName, year: year, trim: subTrim, body: subBody, modelName: subModelName)
-                tmpSubmodels.append(newSubmodel)
+                tmpSubmodels.append(
+                    Submodel(
+                        name: styleDict["name"].stringValue,
+                        niceName: submodel["niceName"]?.stringValue ?? "",
+                        year: year,
+                        trim: styleDict["trim"].stringValue,
+                        body: submodel["body"]?.stringValue ?? "",
+                        modelName: submodel["modelName"]?.stringValue ?? "")
+                )
             }
         }
         submodels = tmpSubmodels
+    }
+}
+
+extension Model {
+    static func list(from json: JSON) -> [Model] {
+        guard let models = json.dictionaryValue["models"] else { return [] }
+        return models.arrayValue.map { Model(json: $0) }.sorted{ $0.niceName < $1.niceName }
     }
 }

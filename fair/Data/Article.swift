@@ -40,3 +40,12 @@ extension Article {
         link = json[JSONFields.link.rawValue].dictionaryValue[JSONFields.href.rawValue]?.url
     }
 }
+
+extension Article {
+    static func list(from json: JSON) -> [Article] {
+        guard let articles = json.dictionaryValue["articles"] else { return [] }
+        return articles.arrayValue.map { jsonArticle -> Article in
+            return Article(json: jsonArticle)
+        }
+    }
+}
